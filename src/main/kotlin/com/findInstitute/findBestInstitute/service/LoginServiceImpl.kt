@@ -9,8 +9,8 @@ import com.findInstitute.findBestInstitute.model.Institute
 import com.findInstitute.findBestInstitute.model.Student
 import com.findInstitute.findBestInstitute.util.JwtUtils
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.servlet.http.HttpServletResponse
 
 @Service
@@ -58,24 +58,27 @@ class LoginServiceImpl(
         if (adminDAO.existsByEmail(email)) {
             var admin: Admin = this.adminService.viewAdmin(email)
             admin.isLoggedIn = false
-            val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-            val now = LocalDateTime.now()
+            val now = Date()
+            val dtf = SimpleDateFormat("dd-MM-yyyy hh:mm")
+            dtf.timeZone=TimeZone.getTimeZone("Asia/Calcutta")
             admin.lastLogin = dtf.format(now)
             adminDAO.save(admin)
             return "Logout Successfully"
         } else if (studentDAO.existsByEmail(email)) {
             var student: Student = this.studentService.viewStudentByEmail(email)
             student.isLoggedIn = false
-            val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-            val now = LocalDateTime.now()
+            val now = Date()
+            val dtf = SimpleDateFormat("dd-MM-yyyy hh:mm")
+            dtf.timeZone= TimeZone.getTimeZone("Asia/Calcutta")
             student.lastLogin = dtf.format(now)
             studentDAO.save(student)
             return "Logout Successfully"
         } else if (instituteDAO.existsByEmail(email)) {
             var institute: Institute = this.instituteService.viewInstituteByEmail(email)
             institute.isLoggedIn = false
-            val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-            val now = LocalDateTime.now()
+            val now = Date()
+            val dtf = SimpleDateFormat("dd-MM-yyyy hh:mm")
+            dtf.timeZone=TimeZone.getTimeZone("Asia/Calcutta")
             institute.lastLogin = dtf.format(now)
             instituteDAO.save(institute)
             return "Logout Successfully"

@@ -9,8 +9,8 @@ import com.findInstitute.findBestInstitute.exception.DeleteException
 import com.findInstitute.findBestInstitute.exception.GetEmptyException
 import com.findInstitute.findBestInstitute.model.Enquiry
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Service
 class StudentsForEnquiryServiceImpl(
@@ -37,8 +37,9 @@ class StudentsForEnquiryServiceImpl(
                 enquiry.stuName = enquiryDto.stuName
                 enquiry.stuEmail = enquiryDto.stuEmail
                 enquiry.phoneNo = enquiryDto.phoneNo
-                val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
-                val now = LocalDateTime.now()
+                val now = Date()
+                val dtf = SimpleDateFormat("dd-MM-yyyy hh:mm")
+                dtf.timeZone=TimeZone.getTimeZone("Asia/Calcutta")
                 enquiry.enqTime = dtf.format(now)
                 return this.enquiryDAO.save(enquiry)
             }
