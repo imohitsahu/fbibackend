@@ -9,6 +9,8 @@ import com.findInstitute.findBestInstitute.exception.DeleteException
 import com.findInstitute.findBestInstitute.exception.GetEmptyException
 import com.findInstitute.findBestInstitute.model.Enquiry
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Service
 class StudentsForEnquiryServiceImpl(
@@ -35,7 +37,9 @@ class StudentsForEnquiryServiceImpl(
                 enquiry.stuName = enquiryDto.stuName
                 enquiry.stuEmail = enquiryDto.stuEmail
                 enquiry.phoneNo = enquiryDto.phoneNo
-                enquiry.enqTime = enquiryDto.enqTime
+                val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+                val now = LocalDateTime.now()
+                enquiry.enqTime = dtf.format(now)
                 return this.enquiryDAO.save(enquiry)
             }
         } else
