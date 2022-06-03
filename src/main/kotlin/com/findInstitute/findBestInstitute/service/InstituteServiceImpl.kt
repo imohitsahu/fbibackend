@@ -73,8 +73,8 @@ class InstituteServiceImpl(
 
     override fun changePassword(email: String, oldPassword: String, newPassword: String): Institute {
         var institute = this.viewInstituteByEmail(email)
-        if (institute.isLoggedIn!!.equals(true)) {
-            if (institute.password.equals(oldPassword)) {
+        if (institute.isLoggedIn!!) {
+            if (institute.password == oldPassword) {
                 institute.password = newPassword
                 instituteDAO.save(institute)
                 return institute
