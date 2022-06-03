@@ -39,7 +39,9 @@ class InstituteController(var instituteService: InstituteService) {
 
     @PutMapping("/{email}/{oldPassword}/{newPassword}")
     fun changeInstitutePassword(
-        @PathVariable email: String, @PathVariable oldPassword: String, @PathVariable newPassword: String
+        @PathVariable email: String,
+        @PathVariable oldPassword: String,
+        @PathVariable newPassword: String
     ): Institute {
         return this.instituteService.changePassword(email, oldPassword, newPassword)
     }

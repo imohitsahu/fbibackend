@@ -40,6 +40,6 @@ data class Institute(
         contactNo: String,
         city: String,
         state: String,
-        map: String?
-    ) : this(email, insName, password, contactNo, city, state, map, null)
+        map: String?,
+    ) : this(email, insName, password, contactNo, city, state, map, null, false, null)
 }
